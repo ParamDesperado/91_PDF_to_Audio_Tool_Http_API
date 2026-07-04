@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Audiobook | Premium TTS Converter V4</title>
+    <meta name="description" content="Convert any PDF into a lifelike audiobook using AI Text-to-Speech.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <header style="position: relative;">
+            <button id="btn-open-library" class="btn-top-right">📖 Library</button>
+            <h1>PDF to <span class="gradient-text">Audiobook</span></h1>
+            <p class="subtitle">Turn your documents into structured, high-quality audio.</p>
+        </header>
+
+        <section class="upload-section" id="upload-zone">
+            <div class="upload-content">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <h3>Drag & Drop your PDF here</h3>
+                <p>or click to browse from your device</p>
+                <input type="file" id="pdf-upload" accept="application/pdf" hidden>
+                <button class="btn-primary" onclick="document.getElementById('pdf-upload').click()">Browse Files</button>
+            </div>
+            <div class="file-info hidden" id="file-info">
+                <p id="file-name">filename.pdf</p>
+                <button class="btn-remove" id="btn-remove">Remove</button>
+            </div>
+        </section>
+
+        <div class="actions">
+            <button class="btn-convert" id="btn-convert" disabled>
+                <span class="btn-text">Convert to Speech</span>
+                <div class="spinner hidden" id="loading-spinner"></div>
+            </button>
+        </div>
+        
+        <div id="error-message" class="error hidden"></div>
+
+        <section class="result-section hidden" id="result-section">
+            <div class="glass-panel">
+                <h3>Now Playing 🎧</h3>
+                <p id="now-playing-title" class="now-playing-title">filename.pdf</p>
+                
+                <audio id="audio-player" class="hidden"></audio>
+
+                <div class="custom-controls">
+                    <div class="progress-container">
+                        <span id="current-time">0:00</span>
+                        <input type="range" id="seek-bar" value="0" max="100">
+                        <span id="duration-time">0:00</span>
+                    </div>
+                    
+                    <div class="control-buttons">
+                        <button id="btn-reset" class="control-btn" title="Reset/Rewind to Start">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                        </button>
+                        
+                        <button id="btn-rewind-10" class="control-btn" title="Rewind 10s">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 19 2 12 11 5 11 19"></polygon><polygon points="22 19 13 12 22 5 22 19"></polygon></svg>
+                        </button>
+
+                        <button id="btn-play-pause" class="control-btn play-btn" title="Play">
+                            <svg id="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            <svg id="icon-pause" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                        </button>
+                        
+                        <button id="btn-forward-10" class="control-btn" title="Forward 10s">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 19 22 12 13 5 13 19"></polygon><polygon points="2 19 11 12 2 5 2 19"></polygon></svg>
+                        </button>
+                        
+                        <div class="speed-control-wrapper">
+                            <select id="speed-select" class="speed-select" title="Playback Speed">
+                                <option value="1">1x</option>
+                                <option value="1.25">1.25x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="2">2x</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <a id="download-link" class="btn-secondary" download>Download MP3</a>
+            </div>
+        </section>
+
+        <!-- Catalog / Library Section -->
+        <section id="library-section" class="library-section glass-panel hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 style="margin: 0;">Your Library</h3>
+                <button id="btn-close-library" class="btn-icon">✖</button>
+            </div>
+            <div id="catalog-list" class="catalog-list">
+                <!-- Items injected via JS -->
+            </div>
+        </section>
+
+        <footer>
+            <p>Created by <span class="gradient-text" style="font-weight: 800;">Param Sangani</span></p>
+        </footer>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
