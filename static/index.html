@@ -3,109 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF to Audiobook | Premium TTS Converter V4</title>
-    <meta name="description" content="Convert any PDF into a lifelike audiobook using AI Text-to-Speech.">
+
+    <!-- Primary Meta -->
+    <title>PDF to Audiobook | Premium TTS Converter</title>
+    <meta name="description" content="Convert any PDF into a high-quality MP3 audiobook instantly. Smart text extraction, natural pauses, and a beautiful audio player — all in your browser.">
+    <meta name="author" content="Param Sangani">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PDF to Audiobook — Premium TTS Converter">
+    <meta property="og:description" content="Convert any PDF into a high-quality MP3 audiobook instantly.">
+    <meta property="og:image" content="/static/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PDF to Audiobook — Premium TTS Converter">
+    <meta name="twitter:description" content="Convert any PDF into a high-quality MP3 audiobook instantly.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎧</text></svg>">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="background-elements">
+    <div class="background-elements" aria-hidden="true">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Vercel notice banner -->
+    <div id="vercel-notice" class="notice-banner" role="alert">
+        <span>⚡ Running on Vercel — large PDFs (100+ pages) may time out. For best results, keep files under 50 pages.</span>
+        <button id="btn-dismiss-notice" class="btn-dismiss" aria-label="Dismiss notice">✕</button>
     </div>
 
     <main class="container">
-        <header style="position: relative;">
-            <button id="btn-open-library" class="btn-top-right">📖 Library</button>
+        <header>
+            <button id="btn-open-library" class="btn-top-right" aria-label="Open audiobook library">
+                📖 Library
+            </button>
             <h1>PDF to <span class="gradient-text">Audiobook</span></h1>
             <p class="subtitle">Turn your documents into structured, high-quality audio.</p>
         </header>
 
-        <section class="upload-section" id="upload-zone">
+        <!-- Upload Zone -->
+        <section class="upload-section" id="upload-zone" role="region" aria-label="PDF upload area">
             <div class="upload-content">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-                <h3>Drag & Drop your PDF here</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     class="upload-icon" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <h3>Drag &amp; Drop your PDF here</h3>
                 <p>or click to browse from your device</p>
-                <input type="file" id="pdf-upload" accept="application/pdf" hidden>
-                <button class="btn-primary" onclick="document.getElementById('pdf-upload').click()">Browse Files</button>
+                <input type="file" id="pdf-upload" accept="application/pdf" hidden aria-label="Choose PDF file">
+                <button class="btn-primary" id="btn-browse" onclick="document.getElementById('pdf-upload').click()" aria-label="Browse for PDF file">
+                    Browse Files
+                </button>
             </div>
-            <div class="file-info hidden" id="file-info">
-                <p id="file-name">filename.pdf</p>
-                <button class="btn-remove" id="btn-remove">Remove</button>
+            <div class="file-info hidden" id="file-info" aria-live="polite">
+                <div class="file-info-inner">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    <div>
+                        <p id="file-name">filename.pdf</p>
+                        <span id="file-size" class="file-size-label"></span>
+                    </div>
+                </div>
+                <button class="btn-remove" id="btn-remove" aria-label="Remove selected file">✕ Remove</button>
             </div>
         </section>
 
+        <!-- Convert Button -->
         <div class="actions">
-            <button class="btn-convert" id="btn-convert" disabled>
+            <button class="btn-convert" id="btn-convert" disabled aria-label="Convert PDF to audiobook">
                 <span class="btn-text">Convert to Speech</span>
-                <div class="spinner hidden" id="loading-spinner"></div>
+                <div class="spinner hidden" id="loading-spinner" aria-hidden="true"></div>
             </button>
         </div>
-        
-        <div id="error-message" class="error hidden"></div>
 
-        <section class="result-section hidden" id="result-section">
+        <!-- Error Message -->
+        <div id="error-message" class="error hidden" role="alert" aria-live="assertive"></div>
+
+        <!-- Result / Player Section -->
+        <section class="result-section hidden" id="result-section" role="region" aria-label="Audio player">
             <div class="glass-panel">
                 <h3>Now Playing 🎧</h3>
                 <p id="now-playing-title" class="now-playing-title">filename.pdf</p>
-                
-                <audio id="audio-player" class="hidden"></audio>
+
+                <audio id="audio-player" class="hidden" aria-hidden="true"></audio>
 
                 <div class="custom-controls">
                     <div class="progress-container">
-                        <span id="current-time">0:00</span>
-                        <input type="range" id="seek-bar" value="0" max="100">
-                        <span id="duration-time">0:00</span>
+                        <span id="current-time" aria-label="Current time">0:00</span>
+                        <input type="range" id="seek-bar" value="0" max="100"
+                               aria-label="Seek audio position" style="--seek-fill: 0%">
+                        <span id="duration-time" aria-label="Total duration">0:00</span>
                     </div>
-                    
+
                     <div class="control-buttons">
-                        <button id="btn-reset" class="control-btn" title="Reset/Rewind to Start">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                        </button>
-                        
-                        <button id="btn-rewind-10" class="control-btn" title="Rewind 10s">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 19 2 12 11 5 11 19"></polygon><polygon points="22 19 13 12 22 5 22 19"></polygon></svg>
+                        <button id="btn-reset" class="control-btn" title="Restart" aria-label="Restart audio">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                                <path d="M3 3v5h5"/>
+                            </svg>
                         </button>
 
-                        <button id="btn-play-pause" class="control-btn play-btn" title="Play">
-                            <svg id="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            <svg id="icon-pause" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                        <button id="btn-rewind-10" class="control-btn" title="Rewind 10s" aria-label="Rewind 10 seconds">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="11 19 2 12 11 5 11 19"></polygon>
+                                <polygon points="22 19 13 12 22 5 22 19"></polygon>
+                            </svg>
                         </button>
-                        
-                        <button id="btn-forward-10" class="control-btn" title="Forward 10s">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 19 22 12 13 5 13 19"></polygon><polygon points="2 19 11 12 2 5 2 19"></polygon></svg>
+
+                        <button id="btn-play-pause" class="control-btn play-btn" title="Play / Pause" aria-label="Play or pause">
+                            <svg id="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <svg id="icon-pause" class="hidden" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <rect x="6" y="4" width="4" height="16"></rect>
+                                <rect x="14" y="4" width="4" height="16"></rect>
+                            </svg>
                         </button>
-                        
+
+                        <button id="btn-forward-10" class="control-btn" title="Forward 10s" aria-label="Forward 10 seconds">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="13 19 22 12 13 5 13 19"></polygon>
+                                <polygon points="2 19 11 12 2 5 2 19"></polygon>
+                            </svg>
+                        </button>
+
                         <div class="speed-control-wrapper">
-                            <select id="speed-select" class="speed-select" title="Playback Speed">
-                                <option value="1">1x</option>
-                                <option value="1.25">1.25x</option>
-                                <option value="1.5">1.5x</option>
-                                <option value="2">2x</option>
+                            <select id="speed-select" class="speed-select" title="Playback Speed" aria-label="Playback speed">
+                                <option value="0.75">0.75×</option>
+                                <option value="1" selected>1×</option>
+                                <option value="1.25">1.25×</option>
+                                <option value="1.5">1.5×</option>
+                                <option value="2">2×</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <a id="download-link" class="btn-secondary" download>Download MP3</a>
+                <a id="download-link" class="btn-secondary" download aria-label="Download MP3 file">
+                    ⬇ Download MP3
+                </a>
             </div>
         </section>
 
-        <!-- Catalog / Library Section -->
-        <section id="library-section" class="library-section glass-panel hidden">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                <h3 style="margin: 0;">Your Library</h3>
-                <button id="btn-close-library" class="btn-icon">✖</button>
+        <!-- Library Section -->
+        <section id="library-section" class="library-section glass-panel hidden" role="region" aria-label="Audiobook library">
+            <div class="library-header">
+                <h3>Your Library</h3>
+                <button id="btn-close-library" class="btn-icon" aria-label="Close library">✖</button>
             </div>
-            <div id="catalog-list" class="catalog-list">
+            <div id="catalog-list" class="catalog-list" aria-live="polite">
                 <!-- Items injected via JS -->
             </div>
         </section>
 
         <footer>
             <p>Created by <span class="gradient-text" style="font-weight: 800;">Param Sangani</span></p>
+            <p class="footer-sub">Powered by FastAPI &amp; gTTS</p>
         </footer>
     </main>
 

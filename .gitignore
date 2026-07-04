@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Local environment
+.env
+.env.local
+.env.*.local
+
+# Uploads & generated audio (ephemeral, never commit)
+uploads/
+audio/
+
+# Catalog (auto-generated at runtime, not for version control)
+catalog.json
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Vercel
+.vercel/
