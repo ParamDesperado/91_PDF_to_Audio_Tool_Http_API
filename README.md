@@ -4,7 +4,7 @@
 
 **Turn any PDF into a high-quality MP3 audiobook — instantly, in your browser.**
 
-[![Live Demo](https://img.shields.io/badge/🚀%20Try%20It%20Live-Visit%20Website-6366f1?style=for-the-badge)](https://YOUR-VERCEL-URL.vercel.app)
+[![Live Demo](https://img.shields.io/badge/🚀%20Try%20It%20Live-Visit%20Website-6366f1?style=for-the-badge)](https://91-pdf-to-audio-tool-http-api-q6gw.vercel.app)
 
 </div>
 
@@ -26,7 +26,7 @@ Upload a PDF. Get an audiobook. That's it.
 
 > **No installation. No account. Just upload and listen.**
 
-👉 **[Open the App →](https://YOUR-VERCEL-URL.vercel.app)**
+👉 **[Open the App →](https://91-pdf-to-audio-tool-http-api-q6gw.vercel.app)**
 
 ---
 
