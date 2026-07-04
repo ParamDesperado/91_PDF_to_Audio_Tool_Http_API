@@ -1,110 +1,58 @@
 # 🎧 PDF to Audiobook Converter
 
-> Convert any PDF document into a structured, high-quality MP3 audiobook — right in your browser.
+<div align="center">
 
-[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel&logoColor=white)](https://vercel.com)
+**Turn any PDF into a high-quality MP3 audiobook — instantly, in your browser.**
 
----
+[![Live Demo](https://img.shields.io/badge/🚀%20Try%20It%20Live-Visit%20Website-6366f1?style=for-the-badge)](https://YOUR-VERCEL-URL.vercel.app)
 
-## ✨ Features
-
-- **Smart PDF Extraction** — Uses `pdfplumber` with font-size analysis to intelligently skip page numbers, headers, and footnotes, while inserting natural pauses before headings.
-- **Math & Gibberish Detection** — Rejects PDFs that are dominated by equations, code, or unreadable characters before wasting time on conversion.
-- **Premium Audio Player** — Glassmorphic UI with Play/Pause, Reset, ±10s Skip, and variable Playback Speed (0.75×–2×).
-- **Persistent Library** — Auto-saves every generated audiobook. Rename, delete, or replay from your in-browser Library.
-- **Download MP3** — Download any generated audiobook directly to your device.
+</div>
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ What It Does
 
-| Layer | Technology |
+Upload a PDF. Get an audiobook. That's it.
+
+- **Smart Extraction** — Skips page numbers, footnotes, and headers. Inserts natural pauses at headings.
+- **Math & Junk Detection** — Rejects PDFs packed with equations or code before wasting your time.
+- **Premium Audio Player** — Play, Pause, ±10s Skip, Restart, and variable Speed (0.75× to 2×).
+- **Your Library** — Every audiobook you generate is saved. Rename, delete, or replay anytime.
+- **Download MP3** — Take your audiobook offline, anytime.
+
+---
+
+## 🚀 Try It Now
+
+> **No installation. No account. Just upload and listen.**
+
+👉 **[Open the App →](https://YOUR-VERCEL-URL.vercel.app)**
+
+---
+
+## 🛠️ Built With
+
+| | Technology |
 |---|---|
-| Backend | Python 3.11, FastAPI |
+| Backend | Python · FastAPI |
 | PDF Parsing | pdfplumber |
-| Text-to-Speech | gTTS (Google Text-to-Speech) |
-| Frontend | Vanilla HTML5, CSS3, JavaScript |
-| Hosting | Vercel (Serverless) |
+| Text-to-Speech | gTTS (Google TTS) |
+| Frontend | Vanilla HTML5 · CSS3 · JavaScript |
+| Hosting | Vercel |
 
 ---
 
-## 🚀 Local Development
-
-### Prerequisites
-- Python 3.11+
-- pip
-
-### Setup
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
-
-# 2. Create and activate a virtual environment
-python -m venv venv
-# Windows:
-venv\Scripts\activate
-# macOS / Linux:
-source venv/bin/activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Run the development server
-python main.py
-```
-
-Open [http://localhost:8000](http://localhost:8000) in your browser.
-
----
-
-## ☁️ Deploy to Vercel
-
-### One-click deploy
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/YOUR_REPO_NAME)
-
-### Manual deploy
-
-```bash
-# Install the Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
-
-> **Note**: Vercel Serverless Functions have a 60-second timeout. Very large PDFs (100+ pages) may exceed this. For unrestricted processing, consider deploying to [Railway](https://railway.app) or [Render](https://render.com).
-
----
-
-## 📁 Project Structure
-
-```
-.
-├── main.py              # FastAPI application
-├── requirements.txt     # Python dependencies
-├── vercel.json          # Vercel deployment config
-└── static/
-    ├── index.html       # Frontend SPA
-    ├── style.css        # Styles (glassmorphism, animations)
-    └── script.js        # Client-side logic
-```
-
----
-
-## ⚠️ License & Usage Terms
+## ⚠️ License
 
 **Created by Param Sangani**
 
 This project is the exclusive intellectual property of Param Sangani.
-- **DO NOT** clone, replicate, distribute, or host this project without explicit written permission.
-- **DO NOT** use the source code for your own commercial projects.
-- Personal, educational, and portfolio review is permitted.
+- **DO NOT** clone, replicate, or redistribute this project or its source code.
+- **DO NOT** host your own version of this application.
+- Personal viewing for portfolio reference is permitted.
 
 ---
 
-*Built with ❤️ using Python, FastAPI, pdfplumber, gTTS, and Vanilla HTML/CSS/JS.*
+<div align="center">
+  <sub>Built with ❤️ by <strong>Param Sangani</strong> · Powered by FastAPI & gTTS</sub>
+</div>
